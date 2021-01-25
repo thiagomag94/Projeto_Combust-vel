@@ -2,7 +2,9 @@ import time
 import sys
 from time import sleep
 #Definição de funções
-##linhas de layout
+
+
+#linha de layout
 def lin():
     print("-"*75)
 
