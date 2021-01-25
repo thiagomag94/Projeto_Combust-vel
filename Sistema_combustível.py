@@ -2,19 +2,15 @@ import time
 import sys
 from time import sleep
 #Definição de funções
-
-
 #linha de layout
 
 def lin2(msg):
     print("-"*75)
     print(msg)
     print("-"*75)
-    
+
 def lin():
     print("-"*75)
-
-
 
 #efeito digitação
 def digitação(words):
@@ -226,7 +222,6 @@ while cont == 's':
                 #ida
                 if condicao1=='1':
                     
-
                     if distancia==dtc:
                         digitação("Você precisará encher o tanque uma vez durante o trajeto de ida")
                         time.sleep(1)
