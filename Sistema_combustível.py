@@ -5,13 +5,16 @@ from time import sleep
 
 
 #linha de layout
-def lin():
-    print("-"*75)
 
 def lin2(msg):
     print("-"*75)
     print(msg)
     print("-"*75)
+    
+def lin():
+    print("-"*75)
+
+
 
 #efeito digitação
 def digitação(words):
