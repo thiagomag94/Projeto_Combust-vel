@@ -1,6 +1,12 @@
 import time
 import sys
 from time import sleep
+import sqlite3
+#conectar com banco de dados
+banco = sqlite3.connect('primeiro_banco.sqlite')
+
+cursor = banco.cursor()
+
 #Definição de funções
 #linha de layout
 
@@ -106,9 +112,11 @@ while cont == 's':
                 if opcao == 'Duas cidades' or opcao == '1':
                     lin2('TRAJETO ENTRE DUAS CIDADES')
 
+                    nome_cidade = input("Qual a cidade de destino? ")
                     autonomia_elet = float(input('Quantos Km/carga faz seu veículo elétrico? '))
                     distancia = float(input('Qual a distancia em Km entre as duas cidades? '))
                     carga_preco = float(input('Qual o preço médio por carga? '))
+                    
                     vtanque = 1
                     distancia_iv = 2*distancia
                     carga_consumida = distancia_iv/autonomia_elet
@@ -116,29 +124,31 @@ while cont == 's':
                     parte_inteira = int(carga_consumida)
                     carga_restante= resto*100/autonomia_elet
                     parte_decimal = resto/autonomia_elet
+                    custo_elet = carga_preco*carga_consumida
                     lin()
 
+                    cursor.execute("INSERT INTO pessoas VALUES('"+nome+"', '"+nome_cidade+"','"+combustivel+"')")
+                    banco.commit()
+                    
 
                     if distancia_iv==autonomia_elet:
                         digitação('Você precisará carregar a bateria totalmente apenas uma vez\n')
                     if distancia_iv < autonomia_elet:
                         digitação('Você consumirá {}% de sua carga total para percorrer o trajeto completo (ida e volta)\n'.format(carga_consumida*100))
-                        digitação("Custo com energia elétrica: R$ {}\n".format(carga_preco*carga_consumida))
+                        digitação("Custo com energia elétrica: R$ {}\n".format(custo_elet))
                     if distancia_iv > autonomia_elet:
                         if resto ==0:
                             digitação('Você terá que recarregar {}x para completar o trajeto\n'.format(parte_inteira))
-                            digitação("Custo com energia elétrica: R$ {:.2f}\n".format(carga_preco * carga_consumida))
+                            digitação("Custo com energia elétrica: R$ {:.2f}\n".format(custo_elet))
                         if parte_inteira >=1 and resto!=0:
                             digitação('Você terá que recarregar a bateria completamente {}x e mais {:.2f}% para completar o trajeto ida e volta\n'.format(parte_inteira,carga_restante))
-                            digitação("Custo com energia elétrica: R$ {:.2f}\n".format(carga_preco * (carga_consumida)))
+                            digitação("Custo com energia elétrica: R$ {:.2f}\n".format(custo_elet))
 
-
-                    
-                    lin()
                 elif opcao == "Rota calculada" or opcao == '2':
 
                     lin2('ROTA COMPLETA PRÉ CALCULADA')
 
+                    nome_cidade = input("Qual a cidade de destino? ")
                     autonomia_elet = float(input('Quantos Km/carga faz seu veículo elétrico? '))
                     distancia = float(input('Qual o tamanho da rota em km ? '))
                     carga_preco = float(input('Qual o preço médio por carga? '))
@@ -151,6 +161,10 @@ while cont == 's':
                     parte_inteira = int(carga_consumida)
                     carga_restante = resto * 100 / autonomia_elet
                     parte_decimal = resto / autonomia_elet
+                    
+                    cursor.execute("INSERT INTO pessoas VALUES( f'{nome} ,f'{nome_cidade} , f'{combustivel} )")
+                    banco.commit()
+                     
                     lin()
 
                     if distancia_iv==autonomia_elet:
@@ -334,7 +348,7 @@ while cont == 's':
         except:
             print(RED +"Você não digitou uma opção válida\n")
     
-
+ 
 
 
 
@@ -346,6 +360,7 @@ while cont == 's':
     if cont != 's' and cont != 'n':
          print(RED +"Você não digitou uma opção válida\n")
 lin()
+
 digitação(RESET + f'Até logo, {nome}!\nEspero vê-lo aqui em breve planejando uma nova viagem!\n')
 lin()
 
