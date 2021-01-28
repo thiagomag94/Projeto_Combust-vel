@@ -3,7 +3,7 @@ import sys
 from time import sleep
 import sqlite3
 #conectar com banco de dados
-banco = sqlite3.connect('primeiro_banco.sqlite')
+banco = sqlite3.connect('primeiro_banco.db')
 
 cursor = banco.cursor()
 
@@ -162,7 +162,7 @@ while cont == 's':
                     carga_restante = resto * 100 / autonomia_elet
                     parte_decimal = resto / autonomia_elet
                     
-                    cursor.execute("INSERT INTO pessoas VALUES( f'{nome} ,f'{nome_cidade} , f'{combustivel} )")
+                    cursor.execute("INSERT INTO pessoas VALUES('"+nome+"', '"+nome_cidade+"','"+combustivel+"')")
                     banco.commit()
                      
                     lin()
