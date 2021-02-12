@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>741</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>741</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:rgb(0, 0, 0)</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>30</y>
+      <width>291</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+font: 22pt &quot;MS Shell Dlg 2&quot;;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>130</y>
+      <width>171</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(0, 255, 0);</string>
+    </property>
+    <property name="text">
+     <string>Escolha a opção que deseja utilizar:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>180</y>
+      <width>211</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>  Calculadora de custo de combustível</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string> Conversor de R$/litro em km rodados</string>
+     </property>
+    </item>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>741</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(231, 231, 231);</string>
+   </property>
+   <widget class="QMenu" name="menuIn_cio">
+    <property name="title">
+     <string>Início</string>
+    </property>
+    <addaction name="actionLogout"/>
+    <addaction name="actionSair"/>
+    <addaction name="separator"/>
+    <addaction name="actionFechar_Janela"/>
+   </widget>
+   <widget class="QMenu" name="menuSobre">
+    <property name="title">
+     <string>Sobre</string>
+    </property>
+    <addaction name="actionP_gina_SPyce_Travel"/>
+    <addaction name="actionDesenvolvedores"/>
+    <addaction name="separator"/>
+    <addaction name="actionC_digo_Fonte"/>
+    <addaction name="actionDoa_es"/>
+   </widget>
+   <addaction name="menuIn_cio"/>
+   <addaction name="menuSobre"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionP_gina_SPyce_Travel">
+   <property name="text">
+    <string>Página SPyce Travel</string>
+   </property>
+  </action>
+  <action name="actionDesenvolvedores">
+   <property name="text">
+    <string>Desenvolvedores</string>
+   </property>
+  </action>
+  <action name="actionLogout">
+   <property name="text">
+    <string>Obter ajuda</string>
+   </property>
+  </action>
+  <action name="actionSair">
+   <property name="text">
+    <string>Encerrar sessão</string>
+   </property>
+  </action>
+  <action name="actionC_digo_Fonte">
+   <property name="text">
+    <string>Código Fonte</string>
+   </property>
+  </action>
+  <action name="actionDoa_es">
+   <property name="text">
+    <string>Doações</string>
+   </property>
+  </action>
+  <action name="actionFechar_Janela">
+   <property name="text">
+    <string>Fechar Janela</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
