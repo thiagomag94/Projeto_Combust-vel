@@ -6,13 +6,13 @@ Sistema que faz cálculo do preço de combustível, quantidade de vezes que prec
 
 
 
-## Dificuldades e encontrados
+## Dificuldades e desafios encontrados
 
 
 
 
 
-## Aprendizados no processo
+## Aprendizados
 
 
 
