@@ -2,6 +2,7 @@ import time
 import sys
 from time import sleep
 import sqlite3
+from os import system
 #conectar com banco de dados
 def banco():
     banco = sqlite3.connect('primeiro_banco.db')
@@ -15,7 +16,7 @@ def banco():
     banco.close()
 
 
-#Definição de f)unções
+#Definição de funções
 #linha de layout
 
 def lin2(msg):
@@ -44,17 +45,18 @@ RESET = "\033[0;0m"
 
 
 def ajuda():
+
     c = 1
     while c == 1:
         var_ajuda = input(RESET+'Deseja obter ajuda? (s/n)  ')
-        if var_ajuda == 's':
-            lin()
+        if var_ajuda.lower() == 's':
+            
             digitação('\nAJUDA:\nA opção (1) é indicada para quem já sabe a distância que quer percorrer\ne deseja saber quanto custará a viagem em combustível.\nTambém é indicada para quem precisa saber se a quantidade de combustível\njá existente vai ser suficiente para percorrer todo o trajeto.\n\n')
             digitação('A opção (2) é indicada para quem só precisa saber quantos quilômetros\npode rodar com determinado valor em dinheiro.\n')
             digitação('\nOk, Vamos continuar...\n')
             c += 1
-        elif var_ajuda == 'n':
-            lin()
+        elif var_ajuda.lower() == 'n':
+
             digitação('\nOk, Vamos continuar...\n')
             c += 1
         else:
@@ -73,59 +75,80 @@ def chamar(self):
 while cont == 's':
     time.sleep(1)
     #mostrar menu
-    lin2('          MENU DE OPÇÕES')
-    time.sleep(0.7)
-    print('1)Calculadora de custo de combustível\n\n2)Calculadora de distância percorrida\n')
-    time.sleep(1)
+    print("""
+-------------------------------------------------------------------
+                        MENU DE OPÇÕES
+-------------------------------------------------------------------
+*       [1] = Planeje sua viagem                                  *
+*                                                                 *
+*                                                                 *
+*       [2] = Calcule quantos km conseguirá percorrer com R$      *
+*                                                                 *
+*                                                                 *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    """)
+ 
     ajuda()
 
     
     #lógica do menu e interação com o usuário
-    time.sleep(0.5)
+    time.sleep(1)
     c = 1
     #laço_opção inválida
     while c == 1:
-        x = input(RESET+'Escolha entre as opções acima qual deseja utilizar(1/2):  ')
-        if  x != '1' and x != '2':
+        opcao = input(RESET+'Escolha entre as opções acima qual deseja utilizar(1/2):  ')
+        if  opcao != '1' and opcao != '2':
             print(RED +"Você não digitou uma opção válida\n")
             c == 1  
-        if x == '1' or x == '2':
+        if opcao == '1' or opcao == '2':
             c += 1
-    variavel_central = x
+    variavel_central = opcao
 
-    
+    system('cls')
     #assistente virtual
         
     digitação('\nQual o seu nome? ')
     nome = input()
+    system('cls')
     lin()
     #implementando um laço para não repetir a assistente virtual.
     if cont2 == 1:
-        digitação('Olá, {}. Tudo bem? sou a assistente virtual dos FURICOS NO ASFALTO. \nTe ajudarei a planejar sua viagem..\nVamos lá?\n'.format(nome))
+        digitação('Olá, {}. Tudo bem? sou a assistente virtual do sPyce Travel. \nTe ajudarei a planejar sua viagem..\nVamos lá?\n'.format(nome))
         lin()
-    
+        time.sleep(1.5)
+    system('cls')
     lin2('aguarde...')
-    time.sleep(2)
+    time.sleep(1.5)
     print('')
-    
+    system('cls')
     if variavel_central == '1':
 
-        lin2("CÁLCULO DE CUSTO DE COMBUSTÍVEL")
+        print("""
+-------------------------------------------------------
+    sPyce Travel Assistant - seu planejador de viagens
+-------------------------------------------------------
+    """)
         time.sleep(1.5)
         
         #seção de obtenção e processamento interno dos dados obtidos
         try:
             digitação('Qual o combustível prefere utilizar?\n')
             time.sleep(1)
-            combustivel = input('1)Gasolina\n2)Álcool\n3)Eletricidade\n\nDigite por extenso:')
-
-            if combustivel == 'eletricidade' or combustivel=='ELETRICIDADE' or combustivel=='Eletricidade':
+            print("""
+[1] = Gasolina
+[2] = Álcool
+[3] = Eletricidade
+    
+    """)
+            combustivel = input('Digite por extenso:')
+            system('cls')
+            if combustivel.lower().strip() == 'eletricidade' :
                 
                 digitação("\nEscolha dentre as opções de trajeto abaixo:\n")
                 time.sleep(0.7)
                 opcao = (input('1)Duas cidades [ida e volta]\n2)Rota pré calculada\n'))
 
-                if opcao == 'Duas cidades' or opcao == '1':
+                if opcao.lower().strip() == 'duas cidades' or opcao.strip() == '1':
                     lin2('TRAJETO ENTRE DUAS CIDADES')
 
                     nome_cidade = input("Qual a cidade de destino? ")
@@ -144,7 +167,7 @@ while cont == 's':
                     lin()
 
                     banco()
-
+                    system('cls')
                     if distancia_iv==autonomia_elet:
                         digitação('Você precisará carregar a bateria totalmente apenas uma vez\n')
                     if distancia_iv < autonomia_elet:
@@ -157,8 +180,8 @@ while cont == 's':
                         if parte_inteira >=1 and resto!=0:
                             digitação('Você terá que recarregar a bateria completamente {}x e mais {:.2f}% para completar o trajeto ida e volta\n'.format(parte_inteira,carga_restante))
                             digitação("Custo com energia elétrica: R$ {:.2f}\n".format(custo_elet))
-
-                elif opcao == "Rota calculada" or opcao == '2':
+                    system('cls')
+                elif opcao.strip().lower() == "Rota calculada" or opcao.strip() == '2':
 
                     lin2('ROTA COMPLETA PRÉ CALCULADA')
 
@@ -168,6 +191,7 @@ while cont == 's':
                     carga_preco = float(input('Qual o preço médio por carga? '))
                     print('Aguarde...Calculando......')
                     time.sleep(2)
+                    system('cls')
                     vtanque = 1
                     distancia_iv =  distancia
                     carga_consumida = distancia_iv / autonomia_elet
@@ -200,18 +224,18 @@ while cont == 's':
                             digitação("\nCusto com energia elétrica: R$ {:.2f}\n".format(carga_preco * (carga_consumida)))
                     time.sleep(0.5)
                     lin()
-                    
-            elif combustivel=='Gasolina' or combustivel=='gasolina' or combustivel=='Álcool' or combustivel=='álcool' or combustivel=='Alcool' or combustivel=='alcool':
+                    system('cls')
+            elif combustivel.strip().lower() == 'gasolina'  or combustivel.strip().lower() == 'álcool':
                 #PARTE 2
-
+                system('cls')
                 nome_cidade = input("Qual a cidade de destino? ")
                 distancia = float(input('\nQual a distancia (Km) entre o ponto de partida e o destino? '))
                 time.sleep(0.5)
-                autonomia = float(input('Quantos Km/L faz seu veículo? '))
+                autonomia = float(input('\nQuantos Km/L faz seu veículo? '))
                 time.sleep(0.5)
-                vtanque = float(input('Qual o volume total do tanque de combustível? '))
+                vtanque = float(input('\nQual o volume total do tanque de combustível? '))
                 time.sleep(0.5)
-                combustivel_preco = float(input('Qual o preço médio por litro de combustível? '))
+                combustivel_preco = float(input('\nQual o preço médio por litro de combustível? '))
                 print('')
 
                
@@ -242,10 +266,10 @@ while cont == 's':
 
                 
 
-
+                system('cls')
                 print('')
-                digitação('Seu veículo faz {:.2f} Km com {:.2f} L de {} \n'.format(dtc, vtanque, combustivel))
-                
+                digitação('Seu veículo faz {:.2f} Km com {:.2f} L de {} \n'.format(dtc, vtanque, combustivel.strip()))
+                time.sleep(1)
                 lin()
                 time.sleep(1)
                 # pergunta se quer calcular para ida e volta ou só ida
@@ -253,20 +277,21 @@ while cont == 's':
                 lin()
                 time.sleep(0.5)
                 #somente ida
+                system('cls')
                 if condicao1=='1':
                     banco()
                     
                     if distancia==dtc:
                         digitação("Você precisará encher o tanque uma vez durante o trajeto de ida")
                         time.sleep(1)
-                        digitação("O custo total com {}: R$ {:.2f}\n".format(combustivel,combustivel_preco*vtanque))                    
+                        digitação("O custo total com {}: R$ {:.2f}\n".format(combustivel.strip(),combustivel_preco*vtanque))                    
                         lin()
                         time.sleep(1)
                     if distancia<dtc:
                         digitação("Você precisará abastecer o tanque com {:.2f} litros ou encher o tanque uma vez durante o trajeto de ida\nCaso opte por encher o tanque, sobrarão {:.2f} litros para fazer {:.2f} km na viagem de volta.\n".format(comb_abastecer,comb_exc,(dtc-distancia)))
                         lin()
                         time.sleep(1)
-                        digitação("O custo total com {} sem encher o tanque: R$ {:.2f}\n".format(combustivel,comb_abastecer*combustivel_preco))
+                        digitação("O custo total com {} sem encher o tanque: R$ {:.2f}\n".format(combustivel.strip(),comb_abastecer*combustivel_preco))
                         time.sleep(1)
                         digitação("O custo total caso deseje encher o tanque: R$ {:.2f}\n".format(vtanque*combustivel_preco))
                         lin()
@@ -275,35 +300,35 @@ while cont == 's':
                         if resto==0:
                             digitação("\nVocê precisará encher o tanque {} vezes durante o trajeto de ida\n".format(parte_inteira))
                             time.sleep(1)
-                            digitação("O custo total com {}: R$ {:.2f}\n".format(combustivel, combustivel_preco * vtanque*parte_inteira))
+                            digitação("O custo total com {}: R$ {:.2f}\n".format(combustivel.strip(), combustivel_preco * vtanque*parte_inteira))
                             time.sleep(1)
                         if parte_inteira == 1:
                             digitação("\nVocê precisará encher o tanque {} vez e encher mais {:.2f} litros para completar o trajeto de ida.\n".format(parte_inteira,comb2_exc))
                             time.sleep(1)
-                            digitação("O custo total com {}: R$ {:.2f}\n".format(combustivel, combustivel_preco *(vtanque *parte_inteira+comb2_exc)))
+                            digitação("O custo total com {}: R$ {:.2f}\n".format(combustivel.strip(), combustivel_preco *(vtanque *parte_inteira+comb2_exc)))
                             lin()
                             time.sleep(1)
                         if parte_inteira>1 and resto!=0:
                             digitação("\nVocê precisará encher o tanque {} vezes e encher mais {:.2f} litros para completar o trajeto de ida.".format(parte_inteira, comb2_exc))
                             time.sleep(1)
-                            digitação("O custo total com {}: R$ {:.2f}\n".format(combustivel,combustivel_preco * ((vtanque * parte_inteira) + comb2_exc)))
+                            digitação("O custo total com {}: R$ {:.2f}\n".format(combustivel.strip(),combustivel_preco * ((vtanque * parte_inteira) + comb2_exc)))
                             lin()
                             time.sleep(1)
-
+                    
                 if condicao1=='2':
                     banco()
 
                     if distancia_iv == dtc:
                             print("Você precisará encher o tanque uma vez para completar o trajeto desejado")
                             time.sleep(1)
-                            print("O custo total com {}: R$ {:.2f}".format(combustivel, combustivel_preco * vtanque))
+                            print("O custo total com {}: R$ {:.2f}".format(combustivel.strip(), combustivel_preco * vtanque))
                             lin()
                             time.sleep(1)
                     if distancia_iv<dtc:
                         print("Você precisará abastecer o tanque com {:.2f} litros ou encher o tanque uma vez durante o trajeto \nCaso opte por encher o tanque, sobrarão {:.2f} litros para fazer {:.2f} km em outra viagem.".format(comb_abastecer2,vtanque-comb_abastecer2,(dtc-distancia_iv)))
                         lin()
                         time.sleep(1)
-                        print("O custo total com {} sem encher o tanque: R$ {:.2f}".format(combustivel,comb_abastecer2*combustivel_preco))
+                        print("O custo total com {} sem encher o tanque: R$ {:.2f}".format(combustivel.strip(),comb_abastecer2*combustivel_preco))
                         time.sleep(1)
                         print("O custo total caso deseje encher o tanque: R$ {:.2f}".format(vtanque*combustivel_preco))
                         lin()
@@ -315,14 +340,14 @@ while cont == 's':
                             time.sleep(1)
                             print("total de combustível gasto: {:.2f} litros".format(parte_inteira2*vtanque))
                             time.sleep(1)
-                            print("O custo total com {}: R$ {:.2f}".format(combustivel, combustivel_preco * vtanque*parte_inteira2))
+                            print("O custo total com {}: R$ {:.2f}".format(combustivel.strip(), combustivel_preco * vtanque*parte_inteira2))
                             time.sleep(1)
                         if parte_inteira2 == 1:
                             print("\nVocê precisará encher o tanque {} vez e encher mais {:.2f} litros para completar o trajeto desejado de {}km.".format(parte_inteira2,comb2_exc2,distancia_iv))
                             time.sleep(1)
                             print("Total de combustível gasto: {:.2f} litros".format(vtanque+comb2_exc2))
                             time.sleep(1)
-                            print("O custo de ida e volta com {}: R$ {:.2f}".format(combustivel, combustivel_preco *(vtanque *parte_inteira2+comb2_exc2)))
+                            print("O custo de ida e volta com {}: R$ {:.2f}".format(combustivel.strip(), combustivel_preco *(vtanque *parte_inteira2+comb2_exc2)))
                             lin()
                             time.sleep(1)
                         if parte_inteira2>1 and resto2!=0:
@@ -330,20 +355,22 @@ while cont == 's':
                             time.sleep(1)
                             print("Total de combustível gasto: {:.2f} litros".format(parte_inteira2*vtanque+comb2_exc2))
                             time.sleep(1)
-                            print("O custo total com {}: R$ {:.2f}".format(combustivel,combustivel_preco * ((vtanque * parte_inteira2) + comb2_exc2)))
+                            print("O custo total com {}: R$ {:.2f}".format(combustivel.strip(),combustivel_preco * ((vtanque * parte_inteira2) + comb2_exc2)))
                             lin()
-                            time.sleep(1)
+                            
+                    
+                                                                                                                                                                                                 
                 if condicao1=='3':
 
                     banco()
                     if distancia==dtc:
                         print("Você precisará encher o tanque uma vez durante a rota")
-                        print("\nO custo total com {}: R$ {:.2f}".format(combustivel,combustivel_preco*vtanque))
+                        print("\nO custo total com {}: R$ {:.2f}".format(combustivel.strip(),combustivel_preco*vtanque))
                         lin()
                     if distancia<dtc:
                         print("Você precisará abastecer o tanque com {:.2f} litros ou encher o tanque uma vez durante a rota\nCaso opte por encher o tanque, sobrarão {:.2f} litros para fazer {:.2f} km em outra viagem.".format(comb_abastecer,comb_exc,(dtc-distancia)))
                         lin()
-                        print("O custo total com {} sem encher o tanque: R$ {:.2f}".format(combustivel,comb_abastecer*combustivel_preco))
+                        print("O custo total com {} sem encher o tanque: R$ {:.2f}".format(combustivel.strip(),comb_abastecer*combustivel_preco))
                         print("O custo total caso deseje encher o tanque: R$ {:.2f}".format(vtanque*combustivel_preco))
                         lin()
                     if distancia>dtc:
@@ -351,45 +378,49 @@ while cont == 's':
                         if resto==0:
                             print("\nVocê precisará encher o tanque {} vezes durante a sua rota".format(parte_inteira))
                             time.sleep(1)
-                            print("O custo total com {}: R$ {:.2f}".format(combustivel, combustivel_preco * vtanque*parte_inteira))
+                            print("O custo total com {}: R$ {:.2f}\n".format(combustivel.strip(), combustivel_preco * vtanque*parte_inteira))
                             time.sleep(1)
                         if parte_inteira == 1:
                             print("\nVocê precisará encher o tanque {} vez e encher mais {:.2f} litros para completar o trajeto.".format(parte_inteira,comb2_exc))
                             time.sleep(1)
-                            print("O custo total com {}: R$ {:.2f}".format(combustivel, combustivel_preco *(vtanque *parte_inteira+comb2_exc)))
+                            print("O custo total com {}: R$ {:.2f}\n".format(combustivel.strip(), combustivel_preco *(vtanque *parte_inteira+comb2_exc)))
                             lin()
                             time.sleep(1)
                         if parte_inteira>1 and resto!=0:
                             print("\nVocê precisará encher o tanque {} vezes e encher mais {:.2f} litros para completar o trajeto.".format(parte_inteira, comb2_exc))
                             time.sleep(1)
-                            print("O custo total com {}: R$ {:.2f}".format(combustivel,combustivel_preco * ((vtanque * parte_inteira) + comb2_exc)))
+                            print("O custo total com {}: R$ {:.2f}\n".format(combustivel.strip(),combustivel_preco * ((vtanque * parte_inteira) + comb2_exc)))
                             lin()
-                            time.sleep(1)
+                        time.sleep(2)
             else:
                 print(RED +"Você não digitou uma opção válida\n")
 
         except:
             print(RED +"Você não digitou uma opção válida\n")
-    
- 
-
-
-
-
+            
     if variavel_central != '1' and variavel_central != '2':
         print(RED +"Você não digitou uma opção válida\n")
-
+    time.sleep(1)
     cont= (input(RESET+'Deseja continuar planejando uma nova viagem? (s/n)   '))
     if cont == 's':
+        system('cls')
         cont2 = 0
     elif cont == 'n':
+        system('cls')
         cont2 = 1
 
     if cont != 's' and cont != 'n':
          print(RED +"Você não digitou uma opção válida\n")
-lin()
 
+time.sleep(0.5)
+system('cls')
 digitação(RESET + f'Até logo, {nome}!\nEspero vê-lo aqui em breve planejando uma nova viagem!\n')
-lin()
+print('''
+--------------------------------------------
+                SAINDO....
+--------------------------------------------
+      ''')
+time.sleep(2)
+system('cls')
 
 

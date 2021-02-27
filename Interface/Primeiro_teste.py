@@ -578,8 +578,9 @@ def redef_senha():
     
 
 app = QtWidgets.QApplication([])
-teladelogin = uic.loadUi("teladelogin.ui")
+
 telainicial = uic.loadUi("telainicial.ui")
+teladelogin = uic.loadUi('teladelogin.ui')
 teladecadastro = uic.loadUi("teladecadastro.ui")
 teladesenha = uic.loadUi("teladesenha.ui")
 teladelogin.pushButton_3.clicked.connect(chama_telainicial)
