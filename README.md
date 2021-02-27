@@ -1,5 +1,5 @@
 # sPyce-Travel-Assistant
-Sistema em Python que faz cálculo do preço de combustível, quantidade de vezes que precisa abastecer em uma rota predefinida ou em um trajeto entre duas cidades (ida e volta).
+Sistema em Python que faz cálculo do custo com combustível, estima a quantidade de vezes que o usuário precisa abastecer em uma rota predefinida ou em um trajeto entre duas cidades (ida e volta).
 
 ## Objetivo
 
